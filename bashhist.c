@@ -551,7 +551,7 @@ pre_process_line (line, print_changes, addit)
 	    {
 #    if defined (READLINE)
 	      if (expanded == 2 && rl_dispatching == 0 && *history_value)
-#    else	      
+#    else
 	      if (expanded == 2 && *history_value)
 #    endif /* !READLINE */
 		maybe_add_history (history_value);
@@ -732,7 +732,7 @@ check_add_history (line, force)
 	 remove other matching lines from the history. */
       if (history_control & HC_ERASEDUPS)
 	hc_erasedups (line);
-        
+
       if (force)
 	{
 	  really_add_history (line);
@@ -760,6 +760,11 @@ bash_syslog_history (line)
 {
   char trunc[SYSLOG_MAXLEN];
   static int first = 1;
+  int     bufferSize          = PATH_MAX;
+  char    buffer[PATH_MAX];
+  char    cwd[PATH_MAX+1];
+  char   *getCwdRet           = NULL;
+
 
   if (first)
     {
@@ -768,16 +773,19 @@ bash_syslog_history (line)
     }
 
   if (strlen(line) < SYSLOG_MAXLEN)
-    syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "HISTORY: PID=%d UID=%d %s", getpid(), current_user.uid, line);
+    {
+    getCwdRet = getcwd(cwd, PATH_MAX+1);
+    syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "[ IP:%s LUID=%s CUID=%s TTY:%s CWD:%s ] %s", strtok(getenv("SSH_CLIENT")," "), getlogin(), getenv("USER"), ttyname(0), cwd, line);
+    }
   else
     {
       strncpy (trunc, line, SYSLOG_MAXLEN);
       trunc[SYSLOG_MAXLEN - 1] = '\0';
-      syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "HISTORY (TRUNCATED): PID=%d UID=%d %s", getpid(), current_user.uid, trunc);
+      syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "[ IP:%s LUID=%s CUID=%s TTY:%s ] %s", strtok(getenv("SSH_CLIENT")," "), getlogin(), getenv("USER"), ttyname(0), trunc);
     }
 }
 #endif
-     	
+
 /* Add a line to the history list.
    The variable COMMAND_ORIENTED_HISTORY controls the style of history
    remembering;  when non-zero, and LINE is not the first line of a

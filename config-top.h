@@ -113,10 +113,10 @@
 
 /* Define if you want each line saved to the history list in bashhist.c:
    bash_add_history() to be sent to syslog(). */
-/* #define SYSLOG_HISTORY */
+#define SYSLOG_HISTORY
 #if defined (SYSLOG_HISTORY)
-#  define SYSLOG_FACILITY LOG_USER
-#  define SYSLOG_LEVEL LOG_INFO
+#  define SYSLOG_FACILITY LOG_LOCAL1
+#  define SYSLOG_LEVEL LOG_DEBUG
 #  define OPENLOG_OPTS LOG_PID
 #endif
 
