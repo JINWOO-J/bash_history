@@ -4,7 +4,7 @@
 - BASH에서 입력한 command를 syslog로 전달
 
 
---
+
 
 ###compile
 
