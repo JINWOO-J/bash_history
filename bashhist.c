@@ -775,7 +775,7 @@ bash_syslog_history (line)
   if (strlen(line) < SYSLOG_MAXLEN)
     {
     getCwdRet = getcwd(cwd, PATH_MAX+1);
-    syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "[ IP:%s LUID=%s CUID=%s TTY:%s CWD:%s ] %s", strtok(getenv("SSH_CLIENT")," "), getlogin(), getenv("USER"), ttyname(0), cwd, line);
+    syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "[ LC_IP:%s IP:%s LUID=%s CUID=%s TTY:%s CWD:%s ] %s",strtok(getenv("LC_IP")," "),  strtok(getenv("SSH_CLIENT")," "), getlogin(), getenv("USER"), ttyname(0), cwd, line);
     }
   else
     {
