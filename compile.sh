@@ -60,7 +60,7 @@ if [ -f /etc/rsyslog.conf ]; then
         echo "# bash command audit" >> /etc/rsyslog.conf
         echo "local1.*                                                /var/log/bash_audit" >> /etc/rsyslog.conf
 		echo -e "\e[1;32;40m Rsyslogd restart \e[0m"
-        /etc/rc.d/init.d/rsyslog restart
+        /etc/rc.d/init.d/rsyslogd restart
     fi
 fi
 
