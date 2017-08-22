@@ -29,11 +29,11 @@ sudo /usr/bin/make install  >/dev/null
 error_check `echo $?`
 
 # /usr/local/bin/bash del
-/bin/rm -f /usr/local/bin/bash
-/bin/rm -f /usr/local/bin/bashbug
+sudo /bin/rm -f /usr/local/bin/bash
+sudo /bin/rm -f /usr/local/bin/bashbug
 
 # backup original bash
-/bin/cp -f /bin/bash /bin/bash_ori_$odate
+sudo /bin/cp -f /bin/bash /bin/bash_ori_$odate
 
 # new bash copy
 if [ -f bash ]; then
