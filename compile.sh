@@ -25,7 +25,7 @@ error_check `echo $?`
 error_check `echo $?`
 
 # make install
-/usr/bin/make install
+sudo /usr/bin/make install
 error_check `echo $?`
 
 # /usr/local/bin/bash del
@@ -40,7 +40,7 @@ if [ -f bash ]; then
     /bin/cp -f ./bash /bin/bash
 else
     echo "compile error, cannot find compiled bash file";
-    exit 
+    exit
 fi
 
 # logrotate add. string add a first line #
