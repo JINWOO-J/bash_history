@@ -16,16 +16,16 @@ function string_check {
 echo -e "\e[1;32;40m Bash install start \e[0m"
 sleep 2
 # compile
-./configure
+./configure  >/dev/null
 error_check `echo $?`
 
 # make
-/usr/bin/make clean
-/usr/bin/make -j 8
+/usr/bin/make clean  >/dev/null
+/usr/bin/make -j 8  >/dev/null
 error_check `echo $?`
 
 # make install
-sudo /usr/bin/make install
+sudo /usr/bin/make install  >/dev/null
 error_check `echo $?`
 
 # /usr/local/bin/bash del
@@ -60,7 +60,7 @@ if [ -f /etc/rsyslog.conf ]; then
         echo "# bash command audit" >> /etc/rsyslog.conf
         echo "local1.*                                                /var/log/bash_audit" >> /etc/rsyslog.conf
 		echo -e "\e[1;32;40m Rsyslogd restart \e[0m"
-        /etc/init.d/rsyslog restart
+        sudo /etc/init.d/rsyslog restart
     fi
 fi
 
@@ -70,7 +70,7 @@ if [ -f /etc/syslog.conf ]; then
         echo "# bash command audit" >> /etc/syslog.conf
         echo "local1.*                                                /var/log/bash_audit" >> /etc/syslog.conf
 		echo -e "\e[1;32;40m syslogd restart \e[0m"
-        /etc/rc.d/init.d/syslog restart
+        sudo /etc/rc.d/init.d/syslog restart
     fi
 fi
 
