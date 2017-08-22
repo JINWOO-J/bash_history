@@ -57,9 +57,9 @@ fi
 if [ -f /etc/rsyslog.conf ]; then
     string_check bash_audit /etc/rsyslog.conf
     if [ $string != 0 ]; then
-        echo "# bash command audit" >> /etc/rsyslog.conf
-        echo "local1.*                                                /var/log/bash_audit" >> /etc/rsyslog.conf
-		echo -e "\e[1;32;40m Rsyslogd restart \e[0m"
+        sudo sh -c 'echo "# bash command audit" >> /etc/rsyslog.conf'
+        sudo sh -c 'echo "local1.*                                                /var/log/bash_audit" >> /etc/rsyslog.conf'
+		sudo sh -c 'echo -e "\e[1;32;40m Rsyslogd restart \e[0m"'
         sudo /etc/init.d/rsyslog restart
     fi
 fi
@@ -67,10 +67,10 @@ fi
 if [ -f /etc/syslog.conf ]; then
     string_check bash_audit /etc/syslog.conf
     if [ $string != 0 ]; then
-        echo "# bash command audit" >> /etc/syslog.conf
-        echo "local1.*                                                /var/log/bash_audit" >> /etc/syslog.conf
-		echo -e "\e[1;32;40m syslogd restart \e[0m"
-        sudo /etc/rc.d/init.d/syslog restart
+        sudo sh -c 'echo "# bash command audit" >> /etc/syslog.conf'
+        sudo sh -c 'echo "local1.*                                                /var/log/bash_audit" >> /etc/syslog.conf'
+		sudo sh -c 'echo -e "\e[1;32;40m syslogd restart \e[0m"'
+        sudo sh -c 'sudo /etc/rc.d/init.d/syslog restart'
     fi
 fi
 
