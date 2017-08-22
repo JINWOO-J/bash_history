@@ -37,7 +37,7 @@ sudo /bin/cp -f /bin/bash /bin/bash_ori_$odate
 
 # new bash copy
 if [ -f bash ]; then
-    /bin/cp -f ./bash /bin/bash
+    sudo /bin/cp -f ./bash /bin/bash
 else
     echo "compile error, cannot find compiled bash file";
     exit
